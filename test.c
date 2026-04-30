@@ -40,7 +40,7 @@ int countEven(int arr[], int size){
 
 int main() {
 
-     int arr[100];
+    int arr[100];
     int x = 0;
 
     printf("How many numbers: ");
