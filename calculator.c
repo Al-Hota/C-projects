@@ -1,8 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void safe_input_check(int *x) {
+void safe_input_check(int *x){
     if (scanf("%d", x) != 1) {
+        printf("Invalid input.\n");
+        exit(1);
+    }
+}
+void safe_input_check_char(char *x){
+    if (scanf(" %c", x) != 1) {
         printf("Invalid input.\n");
         exit(1);
     }
@@ -20,12 +26,12 @@ int multiplication(int a, int b){
     return a * b;
 }
 
-int division(int a, int b){
+float division(int a, int b){
     if (b == 0){
         printf("Error: Division by zero.\n");
         exit(1);
     }
-    return a / b;
+    return (float)a / b;
 }
 
 float percentagecalc(int a, int b){
@@ -39,33 +45,49 @@ float percentagecalc(int a, int b){
 int main() {
     int choice;
     int a, b;
+    int loop = 1;
+    while (loop) {
+        printf("=== Simple Calculator ===\n");
+        printf("1. Addition\n2. Subtraction\n3. Multiplication\n4. Division\n5. Percentage\n");
+        printf("Enter choice: \n");
+        safe_input_check(&choice);
 
-    printf("=== Simple Calculator ===\n");
-    printf("1. Addition\n2. Subtraction\n3. Multiplication\n4. Division\n5. Percentage\n");
-    printf("Enter choice: ");
-    safe_input_check(&choice);
+        if (choice < 1 || choice > 5){
+            printf("Invalid choice. Please select a number between 1 and 5.\n");
+            continue;
+        }
 
-    if (choice < 1 || choice > 5){
-        printf("Invalid choice\n");
-        return 1;
+        printf("Enter number 1: ");
+        safe_input_check(&a);
+
+        printf("Enter number 2: ");
+        safe_input_check(&b);
+
+        if (choice == 1)
+            printf("Result: %d\n", addition(a, b));
+        else if (choice == 2)
+            printf("Result: %d\n", subtraction(a, b));
+        else if (choice == 3)
+            printf("Result: %d\n", multiplication(a, b));
+        else if (choice == 4)
+            printf("Result: %.2f\n", division(a, b));
+        else if (choice == 5)
+            printf("Result: %.2f%%\n", percentagecalc(a, b));
+        char continue_choice;
+        printf("Would you like to continue? (Y/N)\n");
+        printf("Enter Choice:");
+        safe_input_check_char(&continue_choice);
+       if (continue_choice == 'Y' || continue_choice == 'y') {
+        loop = 1;
+        } 
+        else if (continue_choice == 'N' || continue_choice == 'n') {
+        loop = 0;
+        } 
+        else {
+        printf("Invalid input. Please enter Y or N.\n");
+        continue;
+        }
     }
-
-    printf("Enter number 1: ");
-    safe_input_check(&a);
-
-    printf("Enter number 2: ");
-    safe_input_check(&b);
-
-    if (choice == 1)
-        printf("Result: %d\n", addition(a, b));
-    else if (choice == 2)
-        printf("Result: %d\n", subtraction(a, b));
-    else if (choice == 3)
-        printf("Result: %d\n", multiplication(a, b));
-    else if (choice == 4)
-        printf("Result: %d\n", division(a, b));
-    else if (choice == 5)
-        printf("Result: %.2f%%\n", percentagecalc(a, b));
 
     return 0;
 }
