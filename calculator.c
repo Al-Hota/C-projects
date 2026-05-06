@@ -14,6 +14,7 @@ void safe_input_check_char(char *x){
     }
 }
 
+
 int addition(int a, int b){
     return a + b;
 }
@@ -62,17 +63,23 @@ int main() {
 
         printf("Enter number 2: ");
         safe_input_check(&b);
-
-        if (choice == 1)
-            printf("Result: %d\n", addition(a, b));
-        else if (choice == 2)
-            printf("Result: %d\n", subtraction(a, b));
-        else if (choice == 3)
-            printf("Result: %d\n", multiplication(a, b));
-        else if (choice == 4)
-            printf("Result: %.2f\n", division(a, b));
-        else if (choice == 5)
-            printf("Result: %.2f%%\n", percentagecalc(a, b));
+        switch(choice){
+            case 1:
+                printf("Result: %d\n", addition(a, b));
+                break;
+            case 2:
+                printf("Result: %d\n", subtraction(a, b));
+                break;
+            case 3:
+                printf("Result: %d\n", multiplication(a, b));
+                break;
+            case 4:
+                printf("Result: %.2f\n", division(a, b));
+                break;
+            case 5:
+                printf("Result: %.2f%%\n", percentagecalc(a, b));
+                break;
+        }
         char continue_choice;
         printf("Would you like to continue? (Y/N)\n");
         printf("Enter Choice:");
